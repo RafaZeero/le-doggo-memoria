@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react'
 import SingleCard from './components/SingleCard'
 
 const cardImages = [
-  { src: '/img/helmet-1.png', matched: false },
-  { src: '/img/potion-1.png', matched: false },
-  { src: '/img/ring-1.png', matched: false },
-  { src: '/img/scroll-1.png', matched: false },
-  { src: '/img/shield-1.png', matched: false },
-  { src: '/img/sword-1.png', matched: false }
+  { src: '/img/dog1.jpg', matched: false },
+  { src: '/img/dog2.PNG', matched: false },
+  { src: '/img/dog3.jpg', matched: false },
+  { src: '/img/dog4.jpg', matched: false },
+  { src: '/img/dog5.PNG', matched: false },
+  { src: '/img/dog6.PNG', matched: false }
 ]
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
   const shuffleCards = () => {
     const shuffledCards = [...cardImages, ...cardImages]
       .sort(() => Math.random() - 0.5)
-      .map(card => ({ ...card, id: Math.random() }))
+      .map((card, idx) => ({ ...card, id: idx }))
 
     setChoiceOne(null)
     setChoiceTwo(null)
@@ -32,11 +32,12 @@ function App() {
 
   // handle a choice
   const handleChoice = card => {
-    choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
+    // console.log(card)
+    choiceOne && card.id !== choiceOne.id
+      ? setChoiceTwo(card)
+      : setChoiceOne(card)
+    // choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
   }
-
-  // update previous card state
-  // const updateState =
 
   // compare 2 selected cards
   useEffect(() => {
@@ -64,8 +65,6 @@ function App() {
     shuffleCards()
   }, [])
 
-  console.log(cards)
-
   // reset choices & increase turn
   const resetTurn = () => {
     setChoiceOne(null)
@@ -76,8 +75,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Magic Match</h1>
-      <button onClick={shuffleCards}>New Game</button>
+      <h1>Le Doggo memoria</h1>
+      <button onClick={shuffleCards}>Novo Jogo</button>
       <div className="card-grid">
         {cards.map(card => (
           <SingleCard

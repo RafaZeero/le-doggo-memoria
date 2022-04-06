@@ -3,7 +3,7 @@ import './SingleCard.css'
 
 export default function SingleCard({ card, handleChoice, flipped, disabled }) {
   const handleClick = () => {
-    !disabled && handleChoice(card)
+    if (!disabled) return handleChoice(card)
   }
 
   return (
@@ -12,7 +12,7 @@ export default function SingleCard({ card, handleChoice, flipped, disabled }) {
         <img className="front" src={card.src} alt="card front" />
         <img
           className="back"
-          src="./img/cover.png"
+          src="./img/bone.png"
           onClick={handleClick}
           alt="card back"
         />
